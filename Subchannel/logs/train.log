@@ -1,0 +1,29 @@
+Using device: cuda
+train_branch_1 shape: (4000, 100)
+train_branch_2 shape: (4000, 2)
+train_target shape: (4000, 1733, 3)
+test_branch_1 shape: (1000, 100)
+test_branch_2 shape: (1000, 2)
+test_target shape: (1000, 1733, 3)
+Total number of parameters: 1,630,467
+Epoch 1, Train Loss: 0.197764, Val Loss: 0.193603
+Epoch 2, Train Loss: 0.188898, Val Loss: 0.192231
+Epoch 3, Train Loss: 0.188705, Val Loss: 0.195377
+Epoch 4, Train Loss: 0.188601, Val Loss: 0.194164
+Epoch 5, Train Loss: 0.188113, Val Loss: 0.193390
+Epoch 6, Train Loss: 0.188141, Val Loss: 0.193082
+Epoch 7, Train Loss: 0.188060, Val Loss: 0.195599
+Epoch 8, Train Loss: 0.188000, Val Loss: 0.192842
+Epoch 9, Train Loss: 0.187852, Val Loss: 0.192103
+Epoch 10, Train Loss: 0.187745, Val Loss: 0.191870
+Epoch 11, Train Loss: 0.187870, Val Loss: 0.193622
+Epoch 12, Train Loss: 0.187733, Val Loss: 0.191975
+Epoch 13, Train Loss: 0.187715, Val Loss: 0.191896
+Epoch 14, Train Loss: 0.187661, Val Loss: 0.192884
+Epoch 15, Train Loss: 0.187573, Val Loss: 0.192470
+Epoch 16, Train Loss: 0.187607, Val Loss: 0.191868
+Epoch 17, Train Loss: 0.187587, Val Loss: 0.191903
+Epoch 18, Train Loss: 0.187506, Val Loss: 0.192115
+Epoch 19, Train Loss: 0.187610, Val Loss: 0.191777
+Epoch 20, Train Loss: 0.187521, Val Loss: 0.192575
+Training completed.
