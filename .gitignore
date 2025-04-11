@@ -1,3 +1,6 @@
 */data/
 *.pt
 *.log
+
+# specific personal files
+run_notebook_gpu.py
