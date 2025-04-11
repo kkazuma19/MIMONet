@@ -6,15 +6,17 @@ import sys
 import os
 import random
 import matplotlib.pyplot as plt
-from scripts.training import train_model
+#from scripts.training import train_model
 
 src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
 if src_path not in sys.path:
     sys.path.append(src_path)
 
-    
+# importing custom modules
 from utils import MIMONetDataset, DeepONetDataset, ChannelScaler
 from mimonet import MIMONet
+
+from training import train_model
 
 # %%
 # check if GPU is available and set the device
@@ -167,11 +169,11 @@ train_model(
     dataset=train_dataset,
     device='cuda',
     num_epochs=2000,
-    batch_size=4,
+    batch_size=8,
     lr=1e-3,
-    patience=10,
+    patience=20,
     multi_gpu=False,
-    working_dir="Subchannel"   # ✅ This creates Subchannel/checkpoints/
+    working_dir=""
 )
 
 print("Training completed.")

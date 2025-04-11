@@ -8,7 +8,8 @@
 #SBATCH --mem=32G
 #SBATCH --account=bcnx-delta-gpu
 #SBATCH --time=04:00:00
-
+#SBATCH --output=logs/train_%j.log
+#SBATCH --error=logs/train_%j.log
 
 # Load modules
 module purge
@@ -18,13 +19,8 @@ module load openmpi/4.1.6
 eval "$(conda shell.bash hook)"
 conda activate pytorch-env
 
-# Set environment variables
-export PYTHONPATH=/projects/bcnx/kazumak2/MIMONet:$PYTHONPATH
-
 # Change to project directory
 cd /projects/bcnx/kazumak2/MIMONet/Subchannel
 
-# run training script and save log into logs directory there
-python train.py > logs/train.log 2>&1
-
-# end of script
+#Set Python to run in unbuffered mode (-u flag)
+python -u train.py
