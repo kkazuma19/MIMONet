@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=train_subchannel
-#SBATCH --partition=gpuA40x4,gpuA100x4              
+#SBATCH --job-name=subchannel
+#SBATCH --partition=gpuA100x4              
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16

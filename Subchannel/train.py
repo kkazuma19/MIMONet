@@ -30,6 +30,15 @@ print('Using device:', device)
 working_dir = "/projects/bcnx/kazumak2/MIMONet/Subchannel/"
 data_dir = os.path.join(working_dir, "data")
 
+
+# set random seed for reproducibility
+seed = 42
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(seed)
+
 # %% [markdown]
 # ## load datasets
 
@@ -156,14 +165,18 @@ model_args = {
     'merge_type': 'mul'
 }
 
+# scheduler parameters
+scheduler_fn=torch.optim.lr_scheduler.ReduceLROnPlateau
+scheduler_args={'mode': 'min', 'factor': 0.5, 'patience': 10,}
+
 # model training script
 train_model(
     model_fn=MIMONet,
     model_args=model_args,
     optimizer_fn=torch.optim.Adam,
     optimizer_args={'lr': 1e-3, 'weight_decay': 1e-6},
-    scheduler_fn=None,
-    scheduler_args=None,
+    scheduler_fn=scheduler_fn,
+    scheduler_args=scheduler_args,
     dataset=train_dataset,
     device=device,
     num_epochs=500,
