@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=train_subchannel
-#SBATCH --partition=gpuA40x4              
+#SBATCH --partition=gpuA40x4,gpuA100x4              
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --gpus=1
 #SBATCH --mem=32G
 #SBATCH --account=bcnx-delta-gpu
-#SBATCH --time=04:00:00
+#SBATCH --time=12:00:00
 #SBATCH --output=logs/train_%j.log
 #SBATCH --error=logs/train_%j.log
 
