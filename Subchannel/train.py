@@ -18,6 +18,8 @@ from mimonet import MIMONet
 
 from training import train_model
 
+from train_utils import test_kfold_model, test_model
+
 # %%
 # check if GPU is available and set the device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -148,7 +150,7 @@ model = MIMONet(
         [branch_input_dim1, 512, 512, 512, dim],
         [branch_input_dim2, 512, 512, 512, dim]
     ],
-    trunk_arch=[trunk_input_dim, 256, 256, dim],
+    trunk_arch=[trunk_input_dim, 256, 256, 256, dim],
     num_outputs=3, 
     activation_fn=nn.ReLU,
     merge_type='mul'  # or 'sum'
@@ -156,26 +158,82 @@ model = MIMONet(
 
 model = model.to(device)
 
+print(model)
+
 # Print parameter count
 num_params = sum(p.numel() for p in model.parameters())
 print(f"Total number of parameters: {num_params:,}")
 
 # %%
 #from scripts.training import train_model
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1E-6)
+criterion = nn.MSELoss()
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.5)
 
 # %%
 train_model(
     model=model,
     dataset=train_dataset,
+    optimizer = optimizer,
+    scheduler = None,
     device='cuda',
-    num_epochs=2000,
-    batch_size=8,
-    lr=1e-3,
-    patience=20,
+    num_epochs=500,
+    batch_size=4,
+    criterion= criterion,
+    patience=500,
+    k_fold = 5,
     multi_gpu=False,
     working_dir=""
 )
 
+
 print("Training completed.")
 
+## Evaluation
+train_mode = 'k_fold'
+n_hold = 5
 
+if train_mode == 'k_fold':
+    for i in range(n_hold):
+        best_model_path = os.path.join(working_dir, f"checkpoints/best_model_fold{i+1}.pt")
+        
+        if os.path.exists(best_model_path):
+            model.load_state_dict(torch.load(best_model_path, map_location=device))
+            model.to(device)
+            model.eval()
+            print(f"Best model for fold {i+1} loaded.")
+        else:
+            print(f"Best model for fold {i+1} not found. Please check the path.")
+            exit(1)
+        
+        test_kfold_model(
+            fold_id=i+1,
+            model=model,
+            test_loader=test_loader,
+            scaler=scaler,
+            working_dir=working_dir,
+            device=device,
+            test_branch=test_branch
+        )   
+    
+else:
+    # Load the best model (best_model.pt)
+    best_model_path = os.path.join(working_dir, "checkpoints/best_model.pt")
+    if os.path.exists(best_model_path):
+        model.load_state_dict(torch.load(best_model_path))
+        model.to(device)
+        model.eval()
+        print("Best model loaded.")
+    else:
+        print("Best model not found. Please check the path.")
+        exit(1)
+    
+    # Test the model
+    test_model(
+        model=model,
+        test_loader=test_loader,
+        scaler=scaler,
+        working_dir=working_dir,
+        device=device,
+        test_branch=test_branch
+        )

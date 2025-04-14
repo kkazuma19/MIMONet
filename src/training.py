@@ -39,16 +39,22 @@ def evaluate(model, dataloader, criterion, device):
     return val_loss / len(dataloader)
 
 def train_model(
-    model, dataset, device='cuda', num_epochs=500, batch_size=64, 
-    lr=0.001, patience=10, val_ratio=0.2, k_fold=None, multi_gpu=False,
+    model,
+    dataset,
+    optimizer,
+    scheduler=None,
+    device='cuda',
+    num_epochs=500,
+    batch_size=64,
+    criterion=nn.MSELoss(),
+    patience=10,
+    val_ratio=0.2,
+    k_fold=None,
+    multi_gpu=False,
     working_dir="experiment"
 ):
     checkpoint_dir = os.path.join(working_dir, "checkpoints")
-    if not os.path.exists(checkpoint_dir):
-        os.makedirs(checkpoint_dir)
-
-    criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=lr)
+    os.makedirs(checkpoint_dir, exist_ok=True)
 
     if multi_gpu and torch.cuda.device_count() > 1:
         print(f"Using {torch.cuda.device_count()} GPUs")
@@ -56,8 +62,14 @@ def train_model(
 
     model.to(device)
 
+    def step_scheduler(val_loss=None):
+        if scheduler is not None:
+            if isinstance(scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
+                scheduler.step(val_loss)
+            else:
+                scheduler.step()
+
     if k_fold:
-        # K-Fold Cross-Validation
         kfold = KFold(n_splits=k_fold, shuffle=True, random_state=42)
         fold_results = []
 
@@ -77,7 +89,11 @@ def train_model(
                 train_loss = train_epoch(model, train_loader, criterion, optimizer, device)
                 val_loss = evaluate(model, val_loader, criterion, device)
 
-                print(f"Epoch {epoch+1}, Train Loss: {train_loss:.6f}, Val Loss: {val_loss:.6f}")
+                step_scheduler(val_loss)
+
+                current_lr = optimizer.param_groups[0]['lr']
+                print(f"Epoch {epoch+1}, LR: {current_lr:.2e}, Train Loss: {train_loss:.6f}, Val Loss: {val_loss:.6f}")
+
                 if val_loss < best_val_loss:
                     best_val_loss = val_loss
                     epochs_no_improve = 0
@@ -87,12 +103,15 @@ def train_model(
                     if epochs_no_improve >= patience:
                         print("Early stopping triggered.")
                         break
+
             fold_results.append(best_val_loss)
+
+        print(f"\n=== K-Fold Cross-Validation Results ===")
+        print(f"Best Validation Loss for each fold: {fold_results}")
         print(f"\nCV Results: Mean={np.mean(fold_results):.6f}, Std={np.std(fold_results):.6f}")
         return fold_results
 
     else:
-        # Default: train/val split
         val_len = int(len(dataset) * val_ratio)
         train_len = len(dataset) - val_len
         train_set, val_set = random_split(dataset, [train_len, val_len])
@@ -109,10 +128,14 @@ def train_model(
             train_loss = train_epoch(model, train_loader, criterion, optimizer, device)
             val_loss = evaluate(model, val_loader, criterion, device)
 
+            step_scheduler(val_loss)
+
             train_losses.append(train_loss)
             val_losses.append(val_loss)
 
-            print(f"Epoch {epoch+1}, Train Loss: {train_loss:.6f}, Val Loss: {val_loss:.6f}")
+            current_lr = optimizer.param_groups[0]['lr']
+            print(f"Epoch {epoch+1}, LR: {current_lr:.2e}, Train Loss: {train_loss:.6f}, Val Loss: {val_loss:.6f}")
+
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 epochs_no_improve = 0
@@ -122,4 +145,5 @@ def train_model(
                 if epochs_no_improve >= patience:
                     print("Early stopping triggered.")
                     break
+
         return train_losses, val_losses
