@@ -2,5 +2,3 @@
 *.pt
 *.log
 *.npz
-# specific personal files
-run_notebook_gpu.py

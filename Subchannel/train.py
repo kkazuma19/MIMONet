@@ -144,54 +144,45 @@ branch_input_dim1 = 100
 branch_input_dim2 = 2
 trunk_input_dim = 2
 
-# Define MIONet instance (no Fourier, no final linear)
-model = MIMONet(
-    branch_arch_list=[
+
+model_args = {
+    'branch_arch_list': [
         [branch_input_dim1, 512, 512, 512, dim],
         [branch_input_dim2, 512, 512, 512, dim]
     ],
-    trunk_arch=[trunk_input_dim, 256, 256, 256, dim],
-    num_outputs=3, 
-    activation_fn=nn.ReLU,
-    merge_type='mul'  # or 'sum'
-)
+    'trunk_arch': [trunk_input_dim, 256, 256, 256, dim],
+    'num_outputs': 3,
+    'activation_fn': nn.ReLU,
+    'merge_type': 'mul'
+}
 
-model = model.to(device)
-
-print(model)
-
-# Print parameter count
-num_params = sum(p.numel() for p in model.parameters())
-print(f"Total number of parameters: {num_params:,}")
-
-# %%
-#from scripts.training import train_model
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1E-6)
-criterion = nn.MSELoss()
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.5)
-
-# %%
+# model training script
 train_model(
-    model=model,
+    model_fn=MIMONet,
+    model_args=model_args,
+    optimizer_fn=torch.optim.Adam,
+    optimizer_args={'lr': 1e-3, 'weight_decay': 1e-6},
+    scheduler_fn=None,
+    scheduler_args=None,
     dataset=train_dataset,
-    optimizer = optimizer,
-    scheduler = None,
-    device='cuda',
+    device=device,
     num_epochs=500,
     batch_size=4,
-    criterion= criterion,
+    criterion=nn.MSELoss(),
     patience=500,
-    k_fold = 5,
+    k_fold=5,
     multi_gpu=False,
     working_dir=""
 )
-
 
 print("Training completed.")
 
 ## Evaluation
 train_mode = 'k_fold'
 n_hold = 5
+
+# initialize the model using model_args
+model = MIMONet(**model_args).to(device)
 
 if train_mode == 'k_fold':
     for i in range(n_hold):
