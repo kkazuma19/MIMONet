@@ -7,7 +7,7 @@ from sklearn.model_selection import KFold
 import numpy as np
 
 
-def test_kfold_model(fold_id, model, test_loader, scaler, working_dir, device, test_branch):
+def test_kfold_model(fold_id, model, test_loader, scaler, working_dir, device, test_branch, save_array=False):
     predictions = []
     targets = []
 
@@ -28,17 +28,22 @@ def test_kfold_model(fold_id, model, test_loader, scaler, working_dir, device, t
     predictions = scaler.inverse_transform(predictions)
     targets = scaler.inverse_transform(targets)
 
-    output_path = os.path.join(working_dir, f"results/test_results_fold_{fold_id}.npz")
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    if save_array == False:
+        # pass nothing to do
+        pass
+    elif save_array == True:
+        # Save the predictions and targets in same npz file
+        output_path = os.path.join(working_dir, f"results/test_results_fold_{fold_id}.npz")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-    np.savez(
-        output_path,
-        branch1=test_branch['func_params'],
-        branch2=test_branch['stat_params'],
-        predictions=predictions,
-        targets=targets
-    )
-    print(f"Saved test results for fold {fold_id} to {output_path}")
+        np.savez(
+            output_path,
+            branch1=test_branch['func_params'],
+            branch2=test_branch['stat_params'],
+            predictions=predictions,
+            targets=targets
+        )
+        print(f"Saved test results for fold {fold_id} to {output_path}")
     
     # compute relative l2 errors for each channel (1000, 1733, 3)
     relative_l2_errors = np.zeros((predictions.shape[0], predictions.shape[2]))

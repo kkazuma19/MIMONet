@@ -204,7 +204,8 @@ if train_mode == 'k_fold':
             scaler=scaler,
             working_dir=working_dir,
             device=device,
-            test_branch=test_branch
+            test_branch=test_branch,
+            save_array=True
         )   
     
 else:
@@ -226,5 +227,6 @@ else:
         scaler=scaler,
         working_dir=working_dir,
         device=device,
-        test_branch=test_branch
+        test_branch=test_branch,
+        save_array=True
         )
