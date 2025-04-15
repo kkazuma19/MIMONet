@@ -72,7 +72,7 @@ def train_model(
                 scheduler.step()
 
     if k_fold:
-        kfold = KFold(n_splits=k_fold, shuffle=True, random_state=42)
+        kfold = KFold(n_splits=k_fold, shuffle=True, random_state=12345)
         fold_results = []
 
         for fold, (train_ids, val_ids) in enumerate(kfold.split(dataset)):

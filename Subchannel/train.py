@@ -32,7 +32,7 @@ data_dir = os.path.join(working_dir, "data")
 
 
 # set random seed for reproducibility
-seed = 1234
+seed = 12345
 random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
