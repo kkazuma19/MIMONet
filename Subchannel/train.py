@@ -32,7 +32,7 @@ data_dir = os.path.join(working_dir, "data")
 
 
 # set random seed for reproducibility
-seed = 42
+seed = 12345
 random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
@@ -183,7 +183,7 @@ train_model(
     batch_size=4,
     criterion=nn.MSELoss(),
     patience=500,
-    k_fold=5,
+    k_fold=None,
     multi_gpu=False,
     working_dir=""
 )
@@ -191,7 +191,8 @@ train_model(
 print("Training completed.")
 
 ## Evaluation
-train_mode = 'k_fold'
+#train_mode = 'k_fold'
+train_mode = 'default'
 n_hold = 5
 
 # initialize the model using model_args
