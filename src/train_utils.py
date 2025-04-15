@@ -57,7 +57,7 @@ def test_kfold_model(fold_id, model, test_loader, scaler, working_dir, device, t
     print("Standard deviation of relative L2 errors:", std_errors)
 
 
-def test_model(model, test_loader, scaler, working_dir, device, test_branch):
+def test_model(model, test_loader, scaler, working_dir, device, test_branch, save_array=False):
     predictions = []
     targets = []
     with torch.no_grad():
@@ -80,8 +80,21 @@ def test_model(model, test_loader, scaler, working_dir, device, test_branch):
     predictions = scaler.inverse_transform(predictions)
     targets = scaler.inverse_transform(targets)
 
-    # Save the predictions and targets in same npz file
-    np.savez(os.path.join(working_dir, "results/test_results.npz"), branch1= test_branch['func_params'], branch2 = test_branch['stat_params'], predictions=predictions, targets=targets)
+    if save_array == False:
+        pass
+    elif save_array == True:
+        # Save the predictions and targets in same npz file
+        output_path = os.path.join(working_dir, "results/test_results.npz")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+        np.savez(
+            output_path,
+            branch1=test_branch['func_params'],
+            branch2=test_branch['stat_params'],
+            predictions=predictions,
+            targets=targets
+        )
+        print(f"Saved test results to {output_path}")
 
     # compute relative l2 errors for each channel (1000, 1733, 3)
     relative_l2_errors = np.zeros((predictions.shape[0], predictions.shape[2]))
