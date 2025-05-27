@@ -1,0 +1,14 @@
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_746.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1175.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1176.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1178.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1179.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1180.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1184.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1186.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1189.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1497.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1498.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1499.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1524.txt.txt
+/projects/bcnx/fahmed/wavy_dimpled/results/plane/output_1527.txt.txt
