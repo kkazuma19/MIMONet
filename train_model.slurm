@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=subchannel
+#SBATCH --job-name=ldc_train
 #SBATCH --partition=gpuA100x4              
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -20,7 +20,7 @@ eval "$(conda shell.bash hook)"
 conda activate pytorch-env
 
 # Change to project directory
-cd /projects/bcnx/kazumak2/MIMONet/Subchannel
+cd /projects/bcnx/kazumak2/MIMONet/LDC
 
 #Set Python to run in unbuffered mode (-u flag)
 python -u train.py
