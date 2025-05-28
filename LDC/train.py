@@ -145,7 +145,7 @@ train_model(
     batch_size=4,
     criterion=nn.MSELoss(),
     patience=500,
-    k_fold=None,
+    k_fold=5,
     multi_gpu=False,
     working_dir=""
 )
