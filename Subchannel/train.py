@@ -14,7 +14,7 @@ if src_path not in sys.path:
 
 # importing custom modules
 from utils import MIMONetDataset, DeepONetDataset, ChannelScaler
-from mimonet import MIMONet
+from mimonet import MIMONet, MIMONet_Transform
 
 from training import train_model
 
@@ -153,7 +153,7 @@ branch_input_dim1 = 100
 branch_input_dim2 = 2
 trunk_input_dim = 2
 
-
+# Define the model arguments for orig_MIMONet
 model_args = {
     'branch_arch_list': [
         [branch_input_dim1, 512, 512, 512, dim],
@@ -162,14 +162,16 @@ model_args = {
     'trunk_arch': [trunk_input_dim, 256, 256, 256, dim],
     'num_outputs': 3,
     'activation_fn': nn.ReLU,
-    'merge_type': 'mul'
+    'merge_type': 'mul',
 }
+
 
 # scheduler parameters
 scheduler_fn=torch.optim.lr_scheduler.ReduceLROnPlateau
 scheduler_args={'mode': 'min', 'factor': 0.5, 'patience': 10,}
 
 # model training script
+# change the batch size from 4 to 8
 train_model(
     model_fn=MIMONet,
     model_args=model_args,

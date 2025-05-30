@@ -14,7 +14,7 @@ if src_path not in sys.path:
 
 # importing custom modules
 from utils import MIMONetDataset, DeepONetDataset, ChannelScaler
-from mimonet import MIMONet
+from mimonet import MIMONet, MIMONet_Transform
 
 from training import train_model
 
@@ -124,7 +124,8 @@ model_args = {
     'trunk_arch': [trunk_input_dim, 256, 256, 256, dim],
     'num_outputs': 3,
     'activation_fn': nn.ReLU,
-    'merge_type': 'mul'
+    'merge_type': 'mul',
+    'output_transform': False,  # whether to apply output transformation
 }
 
 # scheduler parameters
@@ -133,16 +134,16 @@ scheduler_args={'mode': 'min', 'factor': 0.5, 'patience': 10,}
 
 # model training script
 train_model(
-    model_fn=MIMONet,
+    model_fn=MIMONet_Transform,
     model_args=model_args,
     optimizer_fn=torch.optim.Adam,
-    optimizer_args={'lr': 1e-3, 'weight_decay': 1e-6},
+    optimizer_args={'lr': 1e-3, 'weight_decay': 1e-7},
     scheduler_fn=scheduler_fn,
     scheduler_args=scheduler_args,
     dataset=train_dataset,
     device=device,
     num_epochs=500,
-    batch_size=4,
+    batch_size=8,
     criterion=nn.MSELoss(),
     patience=500,
     k_fold=5,
@@ -151,58 +152,3 @@ train_model(
 )
 
 print("Training completed.")
-
-## Evaluation
-train_mode = 'k_fold'
-#train_mode = 'default'
-n_hold = 5
-
-# initialize the model using model_args
-model = MIMONet(**model_args).to(device)
-
-if train_mode == 'k_fold':
-    for i in range(n_hold):
-        best_model_path = os.path.join(working_dir, f"checkpoints/best_model_fold{i+1}.pt")
-        
-        if os.path.exists(best_model_path):
-            model.load_state_dict(torch.load(best_model_path, map_location=device))
-            model.to(device)
-            model.eval()
-            print(f"Best model for fold {i+1} loaded.")
-        else:
-            print(f"Best model for fold {i+1} not found. Please check the path.")
-            exit(1)
-        
-        test_kfold_model(
-            fold_id=i+1,
-            model=model,
-            test_loader=test_loader,
-            scaler=scaler,
-            working_dir=working_dir,
-            device=device,
-            test_branch=test_branch,
-            save_array=True
-        )   
-    
-else:
-    # Load the best model (best_model.pt)
-    best_model_path = os.path.join(working_dir, "checkpoints/best_model.pt")
-    if os.path.exists(best_model_path):
-        model.load_state_dict(torch.load(best_model_path))
-        model.to(device)
-        model.eval()
-        print("Best model loaded.")
-    else:
-        print("Best model not found. Please check the path.")
-        exit(1)
-    
-    # Test the model
-    test_model(
-        model=model,
-        test_loader=test_loader,
-        scaler=scaler,
-        working_dir=working_dir,
-        device=device,
-        test_branch=test_branch,
-        save_array=True
-        )
