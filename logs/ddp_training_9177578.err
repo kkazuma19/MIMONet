@@ -1,0 +1,84 @@
+[2025-04-16 17:32:55,761] torch.distributed.run: [WARNING] 
+[2025-04-16 17:32:55,761] torch.distributed.run: [WARNING] *****************************************
+[2025-04-16 17:32:55,761] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-04-16 17:32:55,761] torch.distributed.run: [WARNING] *****************************************
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO] Starting elastic_operator with launch configs:
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   entrypoint       : ddp_train_multi_node.py
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   min_nodes        : 2
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   max_nodes        : 2
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   nproc_per_node   : 4
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   run_id           : 844
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   rdzv_backend     : c10d
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   rdzv_endpoint    : 141.142.254.106:29500
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   rdzv_configs     : {'timeout': 900}
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   max_restarts     : 0
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   monitor_interval : 5
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   log_dir          : None
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO]   metrics_cfg      : {}
+[2025-04-16 17:32:55,762] torch.distributed.launcher.api: [INFO] 
+[2025-04-16 17:32:55,765] torch.distributed.elastic.agent.server.local_elastic_agent: [INFO] log directory set to: /tmp/torchelastic_ewz_skod/844_jjw_1e7o
+[2025-04-16 17:32:55,765] torch.distributed.elastic.agent.server.api: [INFO] [default] starting workers for entrypoint: python
+[2025-04-16 17:32:55,766] torch.distributed.elastic.agent.server.api: [INFO] [default] Rendezvous'ing worker group
+[2025-04-16 17:32:59,304] torch.distributed.run: [WARNING] 
+[2025-04-16 17:32:59,304] torch.distributed.run: [WARNING] *****************************************
+[2025-04-16 17:32:59,304] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-04-16 17:32:59,304] torch.distributed.run: [WARNING] *****************************************
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO] Starting elastic_operator with launch configs:
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   entrypoint       : ddp_train_multi_node.py
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   min_nodes        : 2
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   max_nodes        : 2
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   nproc_per_node   : 4
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   run_id           : 844
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   rdzv_backend     : c10d
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   rdzv_endpoint    : 141.142.254.106:29500
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   rdzv_configs     : {'timeout': 900}
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   max_restarts     : 0
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   monitor_interval : 5
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   log_dir          : None
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO]   metrics_cfg      : {}
+[2025-04-16 17:32:59,305] torch.distributed.launcher.api: [INFO] 
+[2025-04-16 17:32:59,314] torch.distributed.elastic.agent.server.local_elastic_agent: [INFO] log directory set to: /tmp/torchelastic_sxm17yw7/844_61kne0xq
+[2025-04-16 17:32:59,314] torch.distributed.elastic.agent.server.api: [INFO] [default] starting workers for entrypoint: python
+[2025-04-16 17:32:59,315] torch.distributed.elastic.agent.server.api: [INFO] [default] Rendezvous'ing worker group
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] [default] Rendezvous complete for workers. Result:
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   restart_count=0
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   master_addr=gpub006.delta.ncsa.illinois.edu
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   master_port=35527
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   group_rank=0
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   group_world_size=2
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   local_ranks=[0, 1, 2, 3]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   role_ranks=[0, 1, 2, 3]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   global_ranks=[0, 1, 2, 3]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   role_world_sizes=[8, 8, 8, 8]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   global_world_sizes=[8, 8, 8, 8]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] 
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] [default] Rendezvous complete for workers. Result:
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   restart_count=0
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   master_addr=gpub006.delta.ncsa.illinois.edu
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   master_port=35527
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   group_rank=1
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   group_world_size=2
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   local_ranks=[0, 1, 2, 3]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   role_ranks=[4, 5, 6, 7]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   global_ranks=[4, 5, 6, 7]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] [default] Starting worker group
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   role_world_sizes=[8, 8, 8, 8]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO]   global_world_sizes=[8, 8, 8, 8]
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] 
+[2025-04-16 17:33:00,065] torch.distributed.elastic.agent.server.local_elastic_agent: [INFO] Environment variable 'TORCHELASTIC_ENABLE_FILE_TIMER' not found. Do not start FileTimerServer.
+[2025-04-16 17:33:00,064] torch.distributed.elastic.agent.server.api: [INFO] [default] Starting worker group
+[2025-04-16 17:33:00,065] torch.distributed.elastic.agent.server.local_elastic_agent: [INFO] Environment variable 'TORCHELASTIC_ENABLE_FILE_TIMER' not found. Do not start FileTimerServer.
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker0 reply file to: /tmp/torchelastic_ewz_skod/844_jjw_1e7o/attempt_0/0/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker1 reply file to: /tmp/torchelastic_ewz_skod/844_jjw_1e7o/attempt_0/1/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker2 reply file to: /tmp/torchelastic_ewz_skod/844_jjw_1e7o/attempt_0/2/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker3 reply file to: /tmp/torchelastic_ewz_skod/844_jjw_1e7o/attempt_0/3/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker0 reply file to: /tmp/torchelastic_sxm17yw7/844_61kne0xq/attempt_0/0/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker1 reply file to: /tmp/torchelastic_sxm17yw7/844_61kne0xq/attempt_0/1/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker2 reply file to: /tmp/torchelastic_sxm17yw7/844_61kne0xq/attempt_0/2/error.json
+[2025-04-16 17:33:00,065] torch.distributed.elastic.multiprocessing: [INFO] Setting worker3 reply file to: /tmp/torchelastic_sxm17yw7/844_61kne0xq/attempt_0/3/error.json
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] [default] worker group successfully finished. Waiting 300 seconds for other agents to finish.
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] Local worker group finished (WorkerState.SUCCEEDED). Waiting 300 seconds for other agents to finish
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] [default] worker group successfully finished. Waiting 300 seconds for other agents to finish.
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] Local worker group finished (WorkerState.SUCCEEDED). Waiting 300 seconds for other agents to finish
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] Done waiting for other agents. Elapsed: 0.0004074573516845703 seconds
+[2025-04-16 17:33:10,070] torch.distributed.elastic.agent.server.api: [INFO] Done waiting for other agents. Elapsed: 0.0005593299865722656 seconds
