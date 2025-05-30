@@ -167,6 +167,9 @@ def train_model(
                 if epochs_no_improve >= patience:
                     print("Early stopping triggered.")
                     break
+                
+        # print the best model path
+        print(f"Best model saved at: {save_path}")
 
         return train_losses, val_losses
 
