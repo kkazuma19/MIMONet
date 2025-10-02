@@ -1,4 +1,0 @@
-/file/read-mesh "/projects/bcnx/fahmed/wavy_dimpled/Wavy_Insert.msh"
-/file/write-mesh-ascii "/projects/bcnx/kazumak2/MIMONet/HeatExchanger3D/Wavy_Insert_ascii_.msh"
-exit
-yes
