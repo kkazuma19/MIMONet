@@ -107,3 +107,18 @@ class ChannelScaler:
                 scale = (max_val - min_val + 1e-8)
                 recovered[:, :, i] = ((x - a) * scale / (b - a)) + min_val
         return recovered
+    
+    def inverse_transform_std(self, stddevs):
+        """Recover stddevs from scaled space to original space (no shift)."""
+        recovered = np.empty_like(stddevs)
+        for i in range(stddevs.shape[2]):
+            s = stddevs[:, :, i]
+            if self.method == 'standard':
+                _, std = self.params[i]
+                recovered[:, :, i] = s * std
+            elif self.method == 'minmax':
+                min_val, max_val = self.params[i]
+                a, b = self.feature_range
+                scale = (max_val - min_val + 1e-8)
+                recovered[:, :, i] = s * (scale / (b - a))
+        return recovered
