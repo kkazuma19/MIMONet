@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=subchannel_train
+#SBATCH --job-name=neural_operator
 #SBATCH --partition=gpuA100x4              
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -24,4 +24,4 @@ cd /projects/bcnx/kazumak2/MIMONet/LDC
 #cd /projects/bcnx/kazumak2/MIMONet/Subchannel
 
 #Set Python to run in unbuffered mode (-u flag)
-python -u train.py
+python -u train_dropout.py
