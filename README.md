@@ -76,6 +76,7 @@ All datasets and pretrained model parameters used in this study are publicly ava
 **[Google Drive Dataset and Pretrained Models](https://drive.google.com/drive/folders/185K0BCAamuoinwJk-Un2Q52uAFpoN9gz?usp=sharing)**
 
 The shared directory contains full simulation datasets, model checkpoints, and evaluation outputs for all three benchmark systems (LDC, Subchannel, HeatExchanger).
+These resources provide complete reproducibility for all quantitative comparisons, ablation analyses, and field-reconstruction experiments.
 
 ### `Baselines/`
 Contains all baseline experiments evaluated in the study, organized by case:
@@ -83,14 +84,27 @@ Contains all baseline experiments evaluated in the study, organized by case:
 - `data/` — preprocessed datasets and configuration files, results (saved as numpy arrays)  
 - `model/` — pretrained weights
 
-### `Benchmark/`
-Includes additional operator-learning baselines with pretrained checkpoints:
+### References for Benchmark Models
 
-- **KCN** — Kernel Convolution Network  
-- **NOMAD** — Neural Operator with Multi-Adam Dynamics  
-- **GeoFNO** — Geometry-aware Fourier Neural Operator  
+The `Benchmark/` directory includes implementations and pretrained checkpoints for three widely used operator-learning baselines. Their original references are:
 
-These resources provide complete reproducibility for all quantitative comparisons, ablation analyses, and field-reconstruction experiments.
+**NOMAD**  
+Seidman, J., Kissas, G., Perdikaris, P., & Pappas, G. J. (2022).  
+*Nonlinear Manifold Decoders for Operator Learning (NOMAD).*  
+Advances in Neural Information Processing Systems, 35, 5601–5613.
+
+**KCN (Kriging Convolutional Networks)**  
+Appleby, G., Liu, L., & Liu, L.-P. (2020).  
+*Kriging Convolutional Networks.*  
+Proceedings of the AAAI Conference on Artificial Intelligence, 34(4), 3187–3194.
+
+**GeoFNO (Fourier Neural Operator with Learned Deformations)**  
+Li, Z., Huang, D. Z., Liu, B., & Anandkumar, A. (2023).  
+*Fourier Neural Operator with Learned Deformations for PDEs on General Geometries.*  
+Journal of Machine Learning Research, 24(388), 1–26.
+
+
+
 
 ---
 
@@ -103,3 +117,9 @@ If you use this repository, datasets, or pretrained models, please cite:
 > **arXiv:2412.00107**, 2024.
 
 ---
+
+## Acknowledgments
+
+This research used both the **DeltaAI** advanced computing and data resource, supported by the National Science Foundation (award **OAC 2320345**) and the State of Illinois, and the **Delta** advanced computing and data resource, supported by the National Science Foundation (award **OAC 2005572**) and the State of Illinois.  
+Delta and DeltaAI are joint efforts of the **University of Illinois Urbana-Champaign** and its **National Center for Supercomputing Applications (NCSA)**.
+
