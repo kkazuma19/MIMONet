@@ -41,6 +41,21 @@ $$
 
 ---
 
+## Model Performances
+
+MIMONet demonstrates high-fidelity field reconstruction and strong generalization across all three benchmark systems evaluated in the manuscript.  
+The model consistently achieves the lowest mean relative L2 error among neural operator baselines (DeepONet, S-DeepONet, NOMAD, GeoFNO, KCN), while maintaining millisecond-scale inference suitable for real-time virtual sensing.
+
+### Performance Summary
+
+| **Case** | **Fields Predicted** | **Mean Relative L2 Error (%)** | **Notes** |
+|----------|-----------------------|--------------------------------|-----------|
+| **LDC (Lid-Driven Cavity)** | Pressure, Velocity Magnitude, Turbulence Kinetic Energy | p: **2.1%**, ∥v∥: **5.0%**, k: **2.8%** | Captures primary and secondary vortices; stable under boundary variations |
+| **Subchannel (PWR Thermal-Hydraulics)** | Velocity Magnitude, Temperature, TKE | ∥v∥: **2.2%**, T: **0.27%**, k: **4.2%** | Accurate reconstruction under varying inlet BCs and turbulent transport |
+| **Heat Exchanger (Thermal-Fluid Flow)** | Pressure, \(u_z\), \(u_y\), \(u_x\) | p: **0.80%**, \(u_z\): **1.45%**, \(u_y\): **1.02%**, \(u_x\): **0.52%** | High-fidelity pressure–velocity prediction in a complex 3D geometry |
+
+
+
 ## Source Code (`src/`)
 
 The `src/` directory contains the complete implementation of MIMONet and supporting baselines. The codebase is modular and aligned with all experiments reported in the paper.
