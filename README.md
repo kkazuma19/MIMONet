@@ -13,10 +13,12 @@ MIMONet combines the expressive power of neural operators with lightweight infer
 ## Key Features
 
 - **Operator Learning for High-Dimensional Field Reconstruction**  
-  Learns nonlinear mappings 
+  Learns nonlinear mappings
+  
   $$
   \mathcal{G}: \mathcal{U} \to \mathcal{S},
-  $$
+  $$ 
+  
   where $\mathcal{U}$ contains boundary conditions, forcing terms, or sparse sensor inputs, and $\mathcal{S}$ represents high-resolution physical fields. MIMONet supports mesh-aware coordinate-based decoding.
 
 
