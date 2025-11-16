@@ -7,7 +7,7 @@ MIMONet combines the expressive power of neural operators with lightweight infer
 ---
 ## MIMONet Overview
 
-![Overview of MIMONet architecture and UQ pipeline](Figures/overview_uq.png)
+![Overview of MIMONet architecture and UQ pipeline](Figures/overview.png)
 
 
 ## Key Features
